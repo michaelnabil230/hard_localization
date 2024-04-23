@@ -1,7 +1,9 @@
 library hard_localization;
 
-/// A Calculator.
-class Calculator {
-  /// Returns [value] plus 1.
-  int addOne(int value) => value + 1;
-}
+export 'controller.dart';
+export 'localization.dart';
+export 'translator.dart';
+export 'typedef.dart';
+export 'public/index.dart';
+export 'not_found_key/index.dart';
+export 'extensions/index.dart';
