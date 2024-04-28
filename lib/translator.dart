@@ -3,11 +3,13 @@ import 'plural_rules.dart';
 import 'package:intl/intl.dart';
 
 class Translator {
-  final Map<String, dynamic> _translator;
+  final Map<String, dynamic> _data;
 
   final Map<String, dynamic> _nestedKeysCache = {};
 
-  Translator(this._translator);
+  Map<String, dynamic> get data => _data;
+
+  Translator(this._data);
 
   String translate({
     required String key,
@@ -16,9 +18,9 @@ class Translator {
   }) {
     String result = _get(key);
 
-    result = _replaceArgs(result, args);
+    result = _replaceArgs(result: result, args: args);
 
-    return _replaceNamedArgs(result, namedArgs);
+    return _replaceNamedArgs(result: result, namedArgs: namedArgs);
   }
 
   String plural(
@@ -43,39 +45,33 @@ class Translator {
     }
 
     return switch (pluralCase) {
-      PluralCase.ZERO => _resolvePlural(
-          key: key,
-          subKey: 'zero',
+      PluralCase.ZERO => translate(
+          key: '$key.zero',
           args: args ?? [formattedValue],
           namedArgs: namedArgs,
         ),
-      PluralCase.ONE => _resolvePlural(
-          key: key,
-          subKey: 'one',
+      PluralCase.ONE => translate(
+          key: '$key.one',
           args: args ?? [formattedValue],
           namedArgs: namedArgs,
         ),
-      PluralCase.TWO => _resolvePlural(
-          key: key,
-          subKey: 'two',
+      PluralCase.TWO => translate(
+          key: '$key.two',
           args: args ?? [formattedValue],
           namedArgs: namedArgs,
         ),
-      PluralCase.FEW => _resolvePlural(
-          key: key,
-          subKey: 'few',
+      PluralCase.FEW => translate(
+          key: '$key.few',
           args: args ?? [formattedValue],
           namedArgs: namedArgs,
         ),
-      PluralCase.MANY => _resolvePlural(
-          key: key,
-          subKey: 'many',
+      PluralCase.MANY => translate(
+          key: '$key.many',
           args: args ?? [formattedValue],
           namedArgs: namedArgs,
         ),
-      PluralCase.OTHER => _resolvePlural(
-          key: key,
-          subKey: 'other',
+      PluralCase.OTHER => translate(
+          key: '$key.other',
           args: args ?? [formattedValue],
           namedArgs: namedArgs,
         ),
@@ -87,7 +83,7 @@ class Translator {
       return _getNested(key) ?? key;
     }
 
-    return _translator[key] ?? key;
+    return _data[key] ?? key;
   }
 
   String? _getNested(String key) {
@@ -96,7 +92,7 @@ class Translator {
     final keys = key.split('.');
     final kHead = keys.first;
 
-    var value = _translator[kHead];
+    var value = _data[kHead];
 
     for (int i = 1; i < keys.length; i++) {
       if (value is Map<String, dynamic>) value = value[keys[i]];
@@ -119,25 +115,25 @@ class Translator {
     _nestedKeysCache[key] = value;
   }
 
-  bool _isNestedKey(String key) =>
-      !_translator.containsKey(key) && key.contains('.');
+  bool _isNestedKey(String key) => !_data.containsKey(key) && key.contains('.');
 
-  String _replaceArgs(String result, List<String>? args) {
+  String _replaceArgs({required String result, required List<String>? args}) {
     if (args == null || args.isEmpty) return result;
 
-    RegExp replaceArgRegex = RegExp('{}');
-
     for (String str in args) {
-      result = result.replaceFirst(replaceArgRegex, str);
+      result = result.replaceFirst(RegExp('{}'), str);
     }
 
     return result;
   }
 
-  String _replaceNamedArgs(String result, Map<String, String>? args) {
-    if (args == null || args.isEmpty) return result;
+  String _replaceNamedArgs({
+    required String result,
+    required Map<String, String>? namedArgs,
+  }) {
+    if (namedArgs == null || namedArgs.isEmpty) return result;
 
-    args.forEach((String key, String value) {
+    namedArgs.forEach((String key, String value) {
       result = result
           .replaceAll(RegExp('{$key}'), value)
           .replaceAll(RegExp('{${key.toUpperCase()}}'), value.toUpperCase())
@@ -146,39 +142,6 @@ class Translator {
     });
 
     return result;
-  }
-
-  String _resolvePlural({
-    required String key,
-    required String subKey,
-    List<String>? args,
-    Map<String, String>? namedArgs,
-  }) {
-    if (subKey == 'other') {
-      return translate(
-        key: '$key.other',
-        args: args,
-        namedArgs: namedArgs,
-      );
-    }
-
-    String tag = '$key.$subKey';
-
-    String resource = translate(
-      key: tag,
-      args: args,
-      namedArgs: namedArgs,
-    );
-
-    if (resource == tag) {
-      resource = translate(
-        key: '$key.other',
-        args: args,
-        namedArgs: namedArgs,
-      );
-    }
-
-    return resource;
   }
 
   PluralRule? _pluralRule(String languageCode, num howMany) {

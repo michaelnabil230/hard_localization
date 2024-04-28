@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import '/controller.dart';
+import 'package:hard_localization/hard_localization.dart';
+import 'package:intl/intl.dart';
 import '/set_up_localization.dart';
 
 extension LangX on BuildContext {
@@ -15,11 +16,41 @@ extension LangX on BuildContext {
 
   Locale get locale => _controller.locale;
 
-  Locale get deviceLocale => _controller.deviceLocale;
-
   String get languageCode => locale.languageCode;
 
-  bool get isArabic => languageCode.toLowerCase() == 'ar';
+  Locale get deviceLocale => _controller.deviceLocale;
 
-  bool get isEnglish => languageCode.toLowerCase() == 'en';
+  String get deviceLanguageCode => deviceLocale.languageCode;
+
+  String tr(
+    String key, {
+    List<String>? args,
+    Map<String, String>? namedArgs,
+    Locale? locale,
+  }) =>
+      key.tr(
+        args: args,
+        context: this,
+        locale: locale,
+        namedArgs: namedArgs,
+      );
+
+  String plural(
+    String key,
+    int number, {
+    List<String>? args,
+    Map<String, String>? namedArgs,
+    String? name,
+    NumberFormat? format,
+    Locale? locale,
+  }) =>
+      key.plural(
+        number,
+        context: this,
+        locale: locale,
+        args: args,
+        namedArgs: namedArgs,
+        name: name,
+        format: format,
+      );
 }

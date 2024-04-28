@@ -5,7 +5,6 @@ import '/public/tr.dart' as transition;
 import '/public/plural.dart' as transition_plural;
 
 extension TextTranslateExtension on Text {
-  /// {@macro tr}
   Text tr({
     List<String>? args,
     BuildContext? context,
@@ -32,7 +31,6 @@ extension TextTranslateExtension on Text {
         textWidthBasis: textWidthBasis,
       );
 
-  /// {@macro plural}
   Text plural(
     num value, {
     BuildContext? context,

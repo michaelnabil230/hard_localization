@@ -17,6 +17,8 @@ class Localization {
 
   static Localization get instance => _instance ??= Localization._();
 
+  Map<Locale, Translator> get translators => _translators;
+
   static Localization of(BuildContext context) =>
       Localizations.of<Localization>(context, Localization)!;
 
@@ -49,12 +51,6 @@ class Localization {
     return result;
   }
 
-  void _onNotFound(String result, String key) {
-    if (result == key && _onNotFoundKey != null) {
-      _onNotFoundKey!.call(key);
-    }
-  }
-
   String plural(
     String key,
     num value, {
@@ -77,6 +73,12 @@ class Localization {
     _onNotFound(result, key);
 
     return result;
+  }
+
+  void _onNotFound(String result, String key) {
+    if (result == key && _onNotFoundKey != null) {
+      _onNotFoundKey!.call(key);
+    }
   }
 
   Translator _getTranslator([Locale? locale]) {

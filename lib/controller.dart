@@ -14,13 +14,13 @@ import 'package:intl/intl_standalone.dart';
 class LocalizationController extends ChangeNotifier {
   static final Map<Locale, Translator> _translators = {};
 
-  static final List<Locale> _supportedLocales = [];
+  static List<Locale> _supportedLocales = [];
 
   final Locale? _fallbackLocale;
 
   final OnNotFoundCallback? _onNotFoundKey;
 
-  static late Locale _deviceLocale;
+  static Locale? _deviceLocale;
 
   late final OnSave? _onSave;
 
@@ -30,7 +30,7 @@ class LocalizationController extends ChangeNotifier {
 
   Locale get locale => _locale;
 
-  Locale get deviceLocale => _deviceLocale;
+  Locale get deviceLocale => _deviceLocale!;
 
   static List<Locale> get supportedLocales => _supportedLocales;
 
@@ -61,12 +61,10 @@ class LocalizationController extends ChangeNotifier {
     required GetSavedLocale getSavedLocale,
   }) async {
     assetLoader.mapLocales.forEach((key, value) {
-      Locale locale = key.toLocale();
-
-      _translators.addAll({locale: Translator(value)});
-
-      _supportedLocales.add(locale);
+      _translators.addAll({key.toLocale(): Translator(value)});
     });
+
+    _supportedLocales = _translators.keys.toList();
 
     _deviceLocale = (await findSystemLocale()).toLocale();
 

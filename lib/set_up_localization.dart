@@ -33,7 +33,7 @@ class SetUpLocalization extends StatefulWidget {
 class _SetUpLocalizationState extends State<SetUpLocalization> {
   late LocalizationController _localizationController;
 
-  late Widget? _notFoundWidget;
+  Widget? _notFoundWidget;
 
   @override
   void initState() {

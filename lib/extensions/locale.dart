@@ -22,4 +22,8 @@ extension LocaleX on Locale {
 
     return true;
   }
+
+  String toStringWithSeparator({String separator = '_'}) {
+    return toString().split('_').join(separator);
+  }
 }
