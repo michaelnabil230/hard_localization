@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:hard_localization/exceptions/lang_not_found.dart';
@@ -83,7 +84,7 @@ void main() async {
 
     await tester.runAsync(() async {
       await tester.pumpWidget(SetUpLocalization(
-        onSave: (locale) => print('On Save'),
+        onSave: (locale) => log('On Save'),
         child: const MyApp(),
       ));
 

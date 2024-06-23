@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:hard_localization/hard_localization.dart';
@@ -52,7 +53,7 @@ void main() async {
     await tester.runAsync(() async {
       await tester.pumpWidget(SetUpLocalization(
         fallbackLocale: const Locale('ar'),
-        onSave: (Locale locale) => print('On Save'),
+        onSave: (Locale locale) => log('On Save'),
         child: const MyApp(),
       ));
 
@@ -71,7 +72,7 @@ void main() async {
       (WidgetTester tester) async {
     await tester.runAsync(() async {
       await tester.pumpWidget(SetUpLocalization(
-        onSave: (locale) => print('On Save'),
+        onSave: (locale) => log('On Save'),
         child: const MyApp(),
       ));
 
