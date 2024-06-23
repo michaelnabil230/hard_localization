@@ -38,6 +38,11 @@ class JsonAssetLoader extends AssetLoader {
       'one': '{} has {} dollar',
       'other': '{} has {} dollars',
     },
+    'money_named_args': {
+      'zero': '{name} has no money',
+      'one': '{name} has {money} dollar',
+      'other': '{name} has {money} dollars'
+    },
     'nested.but.not.nested': 'nested but not nested',
     'nested': {
       'super': {
@@ -88,17 +93,7 @@ class JsonAssetLoader extends AssetLoader {
       'one': '{name} لديه {money} دولار',
       'other': '{name} لديه {money} دولارات',
     },
-    'nested_periods': {
-      'Processing': 'معالجة',
-      'Processing.': 'معالجة.',
-    },
     'nested.but.not.nested': 'متداخل ولكن ليس متداخلًا',
-    'modified': 'معدل',
-    'many': 'كثير',
-    'messages': 'رسائل',
-    'brackets': 'أقواس',
-    'nestedArg': 'متداخل {}{}',
-    'nestedNamedArg': 'متداخل {secondArg}{thirdArg}',
     'nested': {
       'super': {
         'duper': {
