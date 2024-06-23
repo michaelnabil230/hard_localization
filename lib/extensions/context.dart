@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:hard_localization/hard_localization.dart';
-import 'package:intl/intl.dart';
 import '/set_up_localization.dart';
 
 extension LangX on BuildContext {
@@ -33,24 +32,5 @@ extension LangX on BuildContext {
         context: this,
         locale: locale,
         namedArgs: namedArgs,
-      );
-
-  String plural(
-    String key,
-    int number, {
-    List<String>? args,
-    Map<String, String>? namedArgs,
-    String? name,
-    NumberFormat? format,
-    Locale? locale,
-  }) =>
-      key.plural(
-        number,
-        context: this,
-        locale: locale,
-        args: args,
-        namedArgs: namedArgs,
-        name: name,
-        format: format,
       );
 }

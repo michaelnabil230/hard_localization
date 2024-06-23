@@ -16,33 +16,6 @@ class JsonAssetLoader extends AssetLoader {
     'test_replace_one': 'test replace {}',
     'test_replace_two': 'test replace {} {}',
     'test_replace_named': 'test named replace {arg1} {arg2}',
-    'day': {
-      'zero': '{} days',
-      'one': '{} day',
-      'two': '{} days',
-      'few': '{} few days',
-      'many': '{} many days',
-      'other': '{} other days'
-    },
-    'hat': {
-      'zero': 'no hats',
-      'one': 'one hat',
-      'two': 'two hats',
-      'few': 'few hats',
-      'many': 'many hats',
-      'other': 'other hats'
-    },
-    'hat_other': {'other': 'other hats'},
-    'money': {
-      'zero': '{} has no money',
-      'one': '{} has {} dollar',
-      'other': '{} has {} dollars',
-    },
-    'money_named_args': {
-      'zero': '{name} has no money',
-      'one': '{name} has {money} dollar',
-      'other': '{name} has {money} dollars'
-    },
     'nested.but.not.nested': 'nested but not nested',
     'nested': {
       'super': {
@@ -66,33 +39,6 @@ class JsonAssetLoader extends AssetLoader {
     'test_replace_one': 'اختبار استبدال {}',
     'test_replace_two': 'اختبار استبدال {} {}',
     'test_replace_named': 'اختبار الاستبدال المسمى {arg1} {arg2}',
-    'day': {
-      'zero': '{} أيام',
-      'one': '{} يوم',
-      'two': '{} أيام',
-      'few': '{} أيام',
-      'many': '{} أيام',
-      'other': '{} أيام'
-    },
-    'hat': {
-      'zero': 'لا يوجد قبعات',
-      'one': 'قبعة واحدة',
-      'two': 'قبعتان',
-      'few': '{} قبعات',
-      'many': '{} قبعة',
-      'other': '{} قبعة أخرى'
-    },
-    'hat_other': {'other': '{} قبعة أخرى'},
-    'money': {
-      'zero': '{} ليس لديه مال',
-      'one': '{} لديه {} دولار',
-      'other': '{} لديه {} دولارات',
-    },
-    'money_named_args': {
-      'zero': '{name} ليس لديه مال',
-      'one': '{name} لديه {money} دولار',
-      'other': '{name} لديه {money} دولارات',
-    },
     'nested.but.not.nested': 'متداخل ولكن ليس متداخلًا',
     'nested': {
       'super': {

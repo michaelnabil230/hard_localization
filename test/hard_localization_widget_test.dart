@@ -12,8 +12,6 @@ late BuildContext _context;
 
 late String _contextTranslationValue;
 
-late String _contextPluralValue;
-
 class MyApp extends StatelessWidget {
   final Widget child;
 
@@ -43,7 +41,6 @@ class MyWidget extends StatelessWidget {
       body: Column(
         children: <Widget>[
           const Text('test').tr(),
-          const Text('day').plural(1),
         ],
       ),
     );
@@ -57,13 +54,11 @@ class MyLocalizedWidget extends StatelessWidget {
   Widget build(context) {
     _context = context;
     _contextTranslationValue = context.tr('test');
-    _contextPluralValue = context.plural('day', 1);
 
     return Scaffold(
       body: Column(
         children: <Widget>[
           Text(_contextTranslationValue),
-          Text(_contextPluralValue),
         ],
       ),
     );
@@ -181,9 +176,6 @@ void main() async {
 
       expect(Localization.of(_context), isInstanceOf<Localization>());
       expect(tr('test'), 'اختبار');
-      expect(plural('day', 1), '1 يوم');
-      expect(plural('day', 2), '2 أيام');
-      expect(plural('day', 3), '3 أيام');
     });
   });
 
@@ -309,10 +301,6 @@ void main() async {
           find.text(_contextTranslationValue),
           findsOneWidget,
         );
-        expect(
-          find.text(_contextPluralValue),
-          findsOneWidget,
-        );
       });
     });
 
@@ -329,8 +317,6 @@ void main() async {
 
           const expectedEnTranslateTextWidgetValue = 'test';
           const expectedArTranslateTextWidgetValue = 'اختبار';
-          const expectedEnPluralTextWidgetValue = '1 day';
-          const expectedArPluralTextWidgetValue = '1 يوم';
           const arabyLocale = Locale('ar');
 
           await tester.idle();
@@ -342,22 +328,12 @@ void main() async {
             true,
           );
 
-          expect(
-            _contextPluralValue == expectedEnPluralTextWidgetValue,
-            true,
-          );
-
           _context.setLocale(arabyLocale);
 
           await tester.pumpAndSettle();
 
           expect(
             _contextTranslationValue == expectedArTranslateTextWidgetValue,
-            true,
-          );
-
-          expect(
-            _contextPluralValue == expectedArPluralTextWidgetValue,
             true,
           );
         });

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'exceptions/lang_not_found.dart';
 import 'not_found_key/typedef.dart';
 import 'translator.dart';
-import 'package:intl/intl.dart';
 
 class Localization {
   Localization._();
@@ -44,30 +43,6 @@ class Localization {
       key: key,
       args: args,
       namedArgs: namedArgs,
-    );
-
-    _onNotFound(result, key);
-
-    return result;
-  }
-
-  String plural(
-    String key,
-    num value, {
-    List<String>? args,
-    Map<String, String>? namedArgs,
-    Locale? locale,
-    String? name,
-    NumberFormat? format,
-  }) {
-    String result = _getTranslator(locale).plural(
-      key,
-      value,
-      _getLocale(locale).languageCode,
-      args: args,
-      namedArgs: namedArgs,
-      name: name,
-      format: format,
     );
 
     _onNotFound(result, key);

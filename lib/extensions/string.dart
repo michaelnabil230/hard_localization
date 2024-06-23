@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
-import '/public/tr.dart' as transition;
-import '/public/plural.dart' as transition_plural;
+import 'package:hard_localization/transition.dart' as transition;
 
 extension StringX on String {
   String toPascalCase() {
@@ -22,26 +20,6 @@ extension StringX on String {
         args: args,
         namedArgs: namedArgs,
         locale: locale,
-      );
-
-  String plural(
-    num value, {
-    BuildContext? context,
-    List<String>? args,
-    Map<String, String>? namedArgs,
-    Locale? locale,
-    String? name,
-    NumberFormat? format,
-  }) =>
-      transition_plural.plural(
-        this,
-        value,
-        context: context,
-        args: args,
-        namedArgs: namedArgs,
-        locale: locale,
-        name: name,
-        format: format,
       );
 
   Locale toLocale({String separator = '_'}) {

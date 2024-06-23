@@ -1,6 +1,4 @@
 import 'extensions/index.dart';
-import 'plural_rules.dart';
-import 'package:intl/intl.dart';
 
 class Translator {
   final Map<String, dynamic> _data;
@@ -21,61 +19,6 @@ class Translator {
     result = _replaceArgs(result: result, args: args);
 
     return _replaceNamedArgs(result: result, namedArgs: namedArgs);
-  }
-
-  String plural(
-    String key,
-    num value,
-    String languageCode, {
-    List<String>? args,
-    Map<String, String>? namedArgs,
-    String? name,
-    NumberFormat? format,
-  }) {
-    final pluralRule = _pluralRule(languageCode, value);
-
-    final PluralCase pluralCase =
-        pluralRule != null ? pluralRule() : _pluralCaseFallback(value);
-
-    final String formattedValue =
-        format == null ? '$value' : format.format(value);
-
-    if (name != null) {
-      namedArgs = {...?namedArgs, name: formattedValue};
-    }
-
-    return switch (pluralCase) {
-      PluralCase.ZERO => translate(
-          key: '$key.zero',
-          args: args ?? [formattedValue],
-          namedArgs: namedArgs,
-        ),
-      PluralCase.ONE => translate(
-          key: '$key.one',
-          args: args ?? [formattedValue],
-          namedArgs: namedArgs,
-        ),
-      PluralCase.TWO => translate(
-          key: '$key.two',
-          args: args ?? [formattedValue],
-          namedArgs: namedArgs,
-        ),
-      PluralCase.FEW => translate(
-          key: '$key.few',
-          args: args ?? [formattedValue],
-          namedArgs: namedArgs,
-        ),
-      PluralCase.MANY => translate(
-          key: '$key.many',
-          args: args ?? [formattedValue],
-          namedArgs: namedArgs,
-        ),
-      PluralCase.OTHER => translate(
-          key: '$key.other',
-          args: args ?? [formattedValue],
-          namedArgs: namedArgs,
-        ),
-    };
   }
 
   String _get(String key) {
@@ -142,19 +85,5 @@ class Translator {
     });
 
     return result;
-  }
-
-  PluralRule? _pluralRule(String languageCode, num howMany) {
-    startRuleEvaluation(howMany);
-    return pluralRules[languageCode];
-  }
-
-  PluralCase _pluralCaseFallback(num value) {
-    return switch (value) {
-      0 => PluralCase.ZERO,
-      1 => PluralCase.ONE,
-      2 => PluralCase.TWO,
-      _ => PluralCase.OTHER,
-    };
   }
 }

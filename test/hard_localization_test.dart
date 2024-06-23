@@ -2,7 +2,6 @@ import 'package:hard_localization/hard_localization.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:intl/intl.dart';
 
 import 'utils/test_asset_loaders.dart';
 
@@ -199,84 +198,6 @@ void main() {
             namedArgs: {'arg': 'what a nest'}),
         'nested.super.duper.nested_with_named_arg what a nest',
       );
-    });
-
-    group('plural', () {
-      test('zero', () {
-        expect(plural('hat', 0), 'no hats');
-      });
-
-      test('one', () {
-        expect(plural('hat', 1), 'one hat');
-      });
-
-      test('two', () {
-        expect(plural('hat', 2), 'two hats');
-      });
-
-      test('few', () {
-        // @TODO not sure how this works
-      });
-
-      test('many', () {
-        // @TODO not sure how this works
-      });
-
-      test('other', () {
-        expect(plural('hat', -1), 'other hats');
-      });
-
-      test('other as fallback', () {
-        expect(plural('hat_other', 1), 'other hats');
-      });
-
-      test('two as fallback and fallback translations priority', () {
-        expect(
-          plural('test_fallback_plurals', 2),
-          'fallback two',
-        );
-      });
-
-      test('with number format', () {
-        expect(
-          plural('day', 3, format: NumberFormat.currency()),
-          'USD3.00 other days',
-        );
-      });
-
-      test('zero with args', () {
-        expect(plural('money', 0, args: ['John', '0']), 'John has no money');
-      });
-
-      test('one with args', () {
-        expect(plural('money', 1, args: ['John', '1']), 'John has 1 dollar');
-      });
-
-      test('other with args', () {
-        expect(plural('money', 3, args: ['John', '3']), 'John has 3 dollars');
-      });
-
-      test('zero with named args', () {
-        expect(
-          plural(
-            'money_named_args',
-            0,
-            namedArgs: {'name': 'John', 'money': '0'},
-          ),
-          'John has no money',
-        );
-      });
-
-      test('one with named args', () {
-        expect(
-          plural(
-            'money_named_args',
-            1,
-            namedArgs: {'name': 'John', 'money': '1'},
-          ),
-          'John has 1 dollar',
-        );
-      });
     });
   });
 }

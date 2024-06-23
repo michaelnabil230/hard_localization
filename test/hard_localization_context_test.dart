@@ -35,7 +35,6 @@ class MyWidget extends StatelessWidget {
       body: Column(
         children: <Widget>[
           const Text('test').tr(),
-          const Text('day').plural(1),
         ],
       ),
     );
