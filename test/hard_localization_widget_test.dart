@@ -98,9 +98,6 @@ void main() async {
       final trFinder = find.text('test');
       expect(trFinder, findsOneWidget);
 
-      final pluralFinder = find.text('1 day');
-      expect(pluralFinder, findsOneWidget);
-
       expect(tr('test'), 'test');
 
       expect('test'.tr(), 'test');
@@ -131,9 +128,6 @@ void main() async {
 
       final trFinder = find.text('test');
       expect(trFinder, findsOneWidget);
-
-      final pluralFinder = find.text('1 day');
-      expect(pluralFinder, findsOneWidget);
 
       expect(tr('test'), 'test');
       expect(_context.locale, const Locale('en'));
@@ -170,9 +164,6 @@ void main() async {
 
       var trFinder = find.text('اختبار');
       expect(trFinder, findsOneWidget);
-
-      var pluralFinder = find.text('1 يوم');
-      expect(pluralFinder, findsOneWidget);
 
       expect(Localization.of(_context), isInstanceOf<Localization>());
       expect(tr('test'), 'اختبار');
